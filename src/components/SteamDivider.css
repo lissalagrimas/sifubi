@@ -1,0 +1,34 @@
+.steam-divider {
+  position: relative;
+  max-width: 600px;
+  height: 34px;
+  margin: 0 auto;
+  opacity: 0.85;
+}
+
+.steam-divider__line {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.steam-divider__wisp {
+  position: absolute;
+  top: -2px;
+  font-size: 13px;
+  color: var(--yellow);
+  font-weight: 800;
+  opacity: 0;
+  transform: rotate(90deg) translateY(0);
+  animation: wisp-rise 3.2s ease-in-out infinite;
+}
+
+.steam-divider__wisp--1 { left: 18%; animation-delay: 0s; }
+.steam-divider__wisp--2 { left: 48%; color: var(--pink); animation-delay: 1s; }
+.steam-divider__wisp--3 { left: 78%; color: var(--sky); animation-delay: 2s; }
+
+@keyframes wisp-rise {
+  0%   { opacity: 0; transform: rotate(90deg) translateY(6px) scale(0.8); }
+  35%  { opacity: 0.9; }
+  100% { opacity: 0; transform: rotate(90deg) translateY(-16px) scale(1.1); }
+}
