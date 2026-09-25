@@ -1,5 +1,5 @@
 import SteamDivider from "../components/SteamDivider";
-import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTiktok, FaEnvelope } from "react-icons/fa";
 import "./About.css";
 
 //hindi pa naeedit
@@ -55,16 +55,25 @@ export default function About() {
         ))}
       </div>
 
-      <section className="contact-section wrap">
+      <section className="contact-section">
         <p className="eyebrow">Get in Touch</p>
         <h2>Craving some siomai?</h2>
         <p className="contact-section__lead">Reach out and we'll take it from there.</p>
         <p className="contact-line">📞 09623973424</p>
-        <p className="contact-line">📧 siomaifusionbites@gmail.com</p>
-        <p className="contact-line">📍#1071 Brgy. Kaligayahan Quirino Hi-Way Novaliches, Quezon City</p>
+        <p className="contact-line">
+  📍#1071 Brgy. Kaligayahan Quirino  <br />
+    Hi-Way Novaliches, Quezon City
+</p>
 
         <div className="social-icons">
           
+          <a href="mailto:siomaifusionbites@gmail.com"
+            className="social-icon"
+            aria-label="Email Sifubi Co."
+          >
+            <FaEnvelope />
+          </a>
+
           <a href="https://www.facebook.com/share/1HtRfVe3sS/"
             target="_blank"
             rel="noreferrer"
@@ -74,7 +83,6 @@ export default function About() {
             <FaFacebookF />
           </a>
 
-          
           <a href="https://www.instagram.com/sifubi.co_ph?igsh=NGVxZmI3ZGh6czE1"
             target="_blank"
             rel="noreferrer"
@@ -84,7 +92,6 @@ export default function About() {
             <FaInstagram />
           </a>
 
-          
           <a href="https://www.tiktok.com/@siomai.fusionbites?_r=1&_t=ZS-98iMXmPe6xY"
             target="_blank"
             rel="noreferrer"

@@ -1,7 +1,16 @@
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 import "./ProductCard.css";
 
 export default function ProductCard({ product }) {
   const { name, price, unit, description, emoji, image, tint } = product;
+  const { addItem } = useCart();
+  const navigate = useNavigate();
+
+  function handleOrder() {
+    addItem(product);
+    navigate("/cart");
+  }
 
   return (
     <div className="product-card">
@@ -18,6 +27,9 @@ export default function ProductCard({ product }) {
           {unit ? `${unit} · ` : ""}₱{price.toFixed(2)}
         </p>
         <p className="product-card__desc">{description}</p>
+        <button className="product-card__order" onClick={handleOrder}>
+          Order Now
+        </button>
       </div>
     </div>
   );

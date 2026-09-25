@@ -49,6 +49,7 @@
   color: var(--navy);
   display: flex;
   align-items: flex-start;
+  justify-content: center;
   gap: 8px;
   margin: 6px 0;
 }

@@ -1,53 +1,22 @@
-//papalitan pa to kasi ang jejemon
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import "./IntroLamp.css";
 
-const CONFETTI_COLORS = ["var(--pink)", "var(--yellow)", "var(--sky)", "#ff8fab", "#ffd166"];
-const CONFETTI_COUNT = 60;
+const VIDEOS = [
+  "/videos/video-1.mp4",
+  "/videos/video-2.mp4",
+  "/videos/video-3.mp4",
+  "/videos/video-4.mp4",
+];
 
 export default function IntroLamp() {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
   const leftRef = useRef(null);
   const rightRef = useRef(null);
   const cordRef = useRef(null);
-  const confettiRef = useRef(null);
-
-  function fireConfetti() {
-    const container = confettiRef.current;
-    if (!container) return;
-    container.innerHTML = "";
-
-    for (let i = 0; i < CONFETTI_COUNT; i++) {
-      const piece = document.createElement("span");
-      piece.className = "confetti-piece";
-      piece.style.setProperty("--c", CONFETTI_COLORS[i % CONFETTI_COLORS.length]);
-
-      // Spawn from either the left edge or the right edge, near the top
-      const fromLeft = i % 2 === 0;
-      const startX = fromLeft
-        ? Math.random() * 15
-        : 85 + Math.random() * 15;
-      piece.style.left = `${startX}%`;
-      piece.style.top = `${Math.random() * 10}%`;
-      container.appendChild(piece);
-
-      gsap.fromTo(
-        piece,
-        { y: 0, x: 0, opacity: 1, rotate: 0 },
-        {
-          y: 220 + Math.random() * 100,
-          x: (fromLeft ? 1 : -1) * (40 + Math.random() * 120),
-          rotate: Math.random() * 720 - 360,
-          opacity: 0,
-          duration: 1.1 + Math.random() * 0.7,
-          ease: "power1.in",
-          delay: Math.random() * 0.3,
-          onComplete: () => piece.remove(),
-        }
-      );
-    }
-  }
+  const videoRef = useRef(null);
 
   function toggleCurtain() {
     const next = !isOpen;
@@ -70,32 +39,100 @@ export default function IntroLamp() {
       xPercent: next ? 100 : 0,
       duration: 0.8,
       ease: "power3.inOut",
-      onComplete: () => {
-        if (next) fireConfetti();
-      },
     });
   }
 
+  function toggleMute() {
+    setIsMuted((prev) => !prev);
+  }
+
+  function goToIndex(i) {
+    setActiveIndex(i);
+    if (!isOpen) toggleCurtain();
+  }
+
+  function goPrev() {
+    goToIndex((activeIndex - 1 + VIDEOS.length) % VIDEOS.length);
+  }
+
+  function goNext() {
+    goToIndex((activeIndex + 1) % VIDEOS.length);
+  }
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    videoRef.current.load();
+    if (isOpen) {
+      videoRef.current.play().catch(() => {});
+    }
+  }, [activeIndex]);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    if (isOpen) {
+      videoRef.current.play().catch(() => {});
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isOpen]);
+
   return (
     <div className="curtain-wrap">
-      <div className="curtain-stage">
-        <img src="/logo.jpg" alt="Sifubi Co." className="curtain-stage__logo" />
-        <div className="curtain-stage__panel curtain-stage__panel--left" ref={leftRef} />
-        <div className="curtain-stage__panel curtain-stage__panel--right" ref={rightRef} />
-        <div className="confetti-layer" ref={confettiRef} />
+      <div className="curtain-row">
+        <div className="curtain-stage">
+          <video
+            ref={videoRef}
+            className="curtain-stage__video"
+            src={VIDEOS[activeIndex]}
+            muted={isMuted}
+            loop
+            playsInline
+          />
+          <div className="curtain-stage__panel curtain-stage__panel--left" ref={leftRef} />
+          <div className="curtain-stage__panel curtain-stage__panel--right" ref={rightRef} />
+
+          {isOpen && (
+            <button
+              className="curtain-stage__mute"
+              onClick={toggleMute}
+              aria-label={isMuted ? "Unmute video" : "Mute video"}
+            >
+              {isMuted ? "🔇" : "🔊"}
+            </button>
+          )}
+        </div>
+
+        <button
+          className="curtain-pull"
+          onClick={toggleCurtain}
+          aria-pressed={isOpen}
+          aria-label={isOpen ? "Close the curtain" : "Pull the curtain open"}
+        >
+          <span className="curtain-pull__rope" ref={cordRef}>
+            <span className="curtain-pull__handle" />
+          </span>
+          <span className="curtain-pull__label">{isOpen ? "Close" : "Pull"}</span>
+        </button>
       </div>
 
-      <button
-        className="curtain-pull"
-        onClick={toggleCurtain}
-        aria-pressed={isOpen}
-        aria-label={isOpen ? "Close the curtain" : "Pull the curtain open"}
-      >
-        <span className="curtain-pull__rope" ref={cordRef}>
-          <span className="curtain-pull__handle" />
-        </span>
-        <span className="curtain-pull__label">{isOpen ? "Close" : "Pull"}</span>
-      </button>
+      <div className="video-nav">
+        <button className="video-nav__arrow" onClick={goPrev} aria-label="Previous video">
+          ‹
+        </button>
+        <div className="video-nav__dots">
+          {VIDEOS.map((_, i) => (
+            <button
+              key={i}
+              className={`video-nav__dot ${i === activeIndex ? "video-nav__dot--active" : ""}`}
+              onClick={() => goToIndex(i)}
+              aria-label={`Show video ${i + 1}`}
+            />
+          ))}
+        </div>
+        <button className="video-nav__arrow" onClick={goNext} aria-label="Next video">
+          ›
+        </button>
+      </div>
     </div>
   );
 }

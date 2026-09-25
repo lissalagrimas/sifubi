@@ -1,12 +1,13 @@
 import SteamDivider from "../components/SteamDivider";
 import ProductCard from "../components/ProductCard";
-import { siomai, drinks, addOns } from "../data/products";
+import { siomai, riceMeals, drinks, addOns } from "../data/products";
 import "./Menu.css";
 
 const SECTIONS = [
   { id: "siomai", title: "Signature Siomai", items: siomai, divider: "var(--yellow)" },
+  { id: "rice-meals", title: "Rice Meals", items: riceMeals, divider: "var(--pink)" },
   { id: "drinks", title: "Drinks", items: drinks, divider: "var(--sky)" },
-  { id: "add-ons", title: "Add-ons", items: addOns, divider: "var(--pink)" },
+  { id: "add-ons", title: "Add-ons", items: addOns, divider: "var(--yellow)" },
 ];
 
 export default function Menu() {
@@ -40,7 +41,7 @@ export default function Menu() {
 
       <SteamDivider color="var(--pink)" />
 
-            <div className="loyalty-section">
+      <div className="loyalty-section">
         <div className="loyalty-card">
           <img
             src="/images/loyalty-card.jpg"

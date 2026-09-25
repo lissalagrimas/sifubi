@@ -32,6 +32,35 @@ export const siomai = [
   },
 ];
 
+// NOTE: prices and descriptions below are placeholders.
+// Replace them with your friend's real rice meal details.
+export const riceMeals = [
+  {
+    id: "rice-shawarma",
+    name: "Shawarma Beef Siomai Rice",
+    price: 110,
+    description: "Shawarma Beef Siomai served with steamed rice and shawarma sauce.",
+    image: "/images/shawarmabeefsiomairice.png",
+    tint: "var(--pink)",
+  },
+  {
+    id: "rice-pastil",
+    name: "Chicken Pastil Siomai Rice",
+    price: 120,
+    description: "Chicken Pastil Siomai served with steamed rice and creamy cheese sauce.",
+    image: "/images/chickenpastilsiomairice.png",
+    tint: "var(--yellow)",
+  },
+  {
+    id: "rice-shrimp",
+    name: "Shrimp Siomai Rice",
+    price: 115,
+    description: "Shrimp Siomai served with steamed rice and sweet spicy sauce.",
+    image: "/images/shrimpsiomairice.png",
+    tint: "var(--sky)",
+  },
+];
+
 export const drinks = [
   {
     id: "cucumber",
@@ -72,4 +101,4 @@ export const addOns = [
 ];
 
 // Kept for anything that still wants "all items" in one flat list.
-export const menu = { siomai, drinks, addOns };
+export const menu = { siomai, riceMeals, drinks, addOns };

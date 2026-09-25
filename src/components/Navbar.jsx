@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 import "./Navbar.css";
 
 const LINKS = [
@@ -11,6 +12,7 @@ const LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { count } = useCart();
 
   useEffect(() => {
     function handleScroll() {
@@ -57,6 +59,18 @@ export default function Navbar() {
               {link.label}
             </NavLink>
           ))}
+
+          <NavLink
+            to="/cart"
+            onClick={() => setOpen(false)}
+            aria-label={`Cart, ${count} items`}
+            className={({ isActive }) =>
+              `navbar__link navbar__cart ${isActive ? "navbar__link--active" : ""}`
+            }
+          >
+            Cart
+            {count > 0 && <span className="navbar__cart-badge">{count}</span>}
+          </NavLink>
         </div>
       </div>
     </nav>
