@@ -29,10 +29,26 @@ export function CartProvider({ children }) {
     setCart((prev) => prev.filter((i) => i.id !== id));
   }
 
+  function clearCart() {
+    setCart([]);
+  }
+
   const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  const count = cart.reduce((sum, i) => sum + i.qty, 0);
 
   return (
-    <CartContext.Provider value={{ cart, addItem, updateQty, removeItem, total }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        addItem,
+        addToCart: addItem, // alias so either name works
+        updateQty,
+        removeItem,
+        clearCart,
+        total,
+        count,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
