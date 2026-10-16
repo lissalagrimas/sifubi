@@ -14,7 +14,7 @@ export const siomai = [
   {
     id: "pastil",
     name: "Chicken Pastil Siomai",
-    price: 80,
+    price: 75,
     description:
       "Chicken Pastil Siomai, influenced by the distinct taste of a beloved Mindanao comfort dish.",
     image: "/images/siomai-pastil.jpg",
@@ -38,7 +38,7 @@ export const riceMeals = [
   {
     id: "rice-shawarma",
     name: "Shawarma Beef Siomai Rice",
-    price: 110,
+    price: 80,
     description: "Shawarma Beef Siomai served with steamed rice and shawarma sauce.",
     image: "/images/shawarmabeefsiomairice.png",
     tint: "var(--pink)",
@@ -46,7 +46,7 @@ export const riceMeals = [
   {
     id: "rice-pastil",
     name: "Chicken Pastil Siomai Rice",
-    price: 120,
+    price: 85,
     description: "Chicken Pastil Siomai served with steamed rice and creamy cheese sauce.",
     image: "/images/chickenpastilsiomairice.png",
     tint: "var(--yellow)",
@@ -54,7 +54,7 @@ export const riceMeals = [
   {
     id: "rice-shrimp",
     name: "Shrimp Siomai Rice",
-    price: 115,
+    price: 85,
     description: "Shrimp Siomai served with steamed rice and sweet spicy sauce.",
     image: "/images/shrimpsiomairice.png",
     tint: "var(--sky)",
@@ -77,7 +77,7 @@ export const addOns = [
   {
     id: "creamy-cheese",
     name: "Creamy Cheese Sauce",
-    price: 20,
+    price: 10,
     description: "A comforting and savory creamy cheese.",
     image: "/images/creamy-cheese.jpg",
     tint: "var(--yellow)",
@@ -85,7 +85,7 @@ export const addOns = [
   {
     id: "garlic-mayo",
     name: "Shawarma Sauce",
-    price: 15,
+    price: 10,
     description: "Creamy mayo with a kick of garlicky flavor.",
     image: "/images/shawarma-sauce.jpg",
     tint: "var(--sky)",
