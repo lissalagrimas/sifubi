@@ -129,22 +129,27 @@
     align-items: stretch;
     background: var(--paper);
     box-shadow: var(--shadow-md);
-    padding: 14px 20px 22px;
-    gap: 8px;
+    padding: 6px 20px 14px;
+    gap: 2px;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.25s ease;
     z-index: 60;
   }
 
-  .navbar__links--open { max-height: 420px; }
+  .navbar__links--open { max-height: 380px; }
 
   .navbar__link {
     text-align: center;
-    padding: 14px 16px;
-    font-size: 16px;
-    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    font-size: 15px;
+    border-radius: 0;
+    border-bottom: 1px solid var(--cream-dim);
   }
+
+  .navbar__link:last-child { border-bottom: none; }
+
+  .navbar__link--active { border-radius: var(--radius-md); }
 
   .navbar__cart { justify-content: center; }
 }
